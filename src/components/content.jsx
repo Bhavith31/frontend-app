@@ -1,7 +1,8 @@
+import './content.css'
 function Content() {
     return (
         <div>
-            <p>product page</p>
+            <p class='product'>product page</p>
         </div>
     )
 }
