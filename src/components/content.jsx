@@ -1,35 +1,38 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./Content.css";
+
 function Content() {
-  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
-  const increment = () => {
-    setCount(count + 1);
-  };
-  const decrement = () => {
-    setCount(count - 1);
-  };
+
   const fetchProducts = async () => {
-    const url = "https://backend-app-lthu.onrender.com/store";
+    const url = "https://backend-app-z2t4.onrender.com/store";
     const res = await axios.get(url);
     setProducts(res.data);
   };
+
   useEffect(() => {
     fetchProducts();
   }, []);
+
   return (
     <div>
-      <h3>Products Page</h3>
-      <button onClick={decrement}>-</button>
-      {count}
-      <button onClick={increment}>+</button>
-      <hr />
-      <ol>
+      <div className="row">
         {products.map((product) => (
-          <li>{product.name}</li>
+          <div className="box" key={product._id}>
+            <img
+              src={`https://backend-app-z2t4.onrender.com/${product.imageUrl}`}
+              width="300px"
+              alt=""
+            />
+            <h3>{product.name}</h3>
+            <p>{product.desc}</p>
+            <h4>{product.price}</h4>
+          </div>
         ))}
-      </ol>
+      </div>
     </div>
   );
 }
+
 export default Content;
